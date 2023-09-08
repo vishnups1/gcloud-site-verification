@@ -1,8 +1,16 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
 builds:
-  binary: gcloud-site-verify
-  goos:
-    - "darwin"
-    - "linux"
-  goarch:
-    - "amd64"
-    - "386"
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - 386
+      - amd64
+    binary: gcloud-site-verify
