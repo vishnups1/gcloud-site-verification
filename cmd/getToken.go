@@ -27,7 +27,7 @@ func getToken(cmd *cobra.Command, args []string) error {
 			Identifier: siteIdentifier,
 			Type:       siteType,
 		},
-		VerificationMethod: verificationMethod,
+		VerificationMethod: siteVerificationMethod,
 	}
 
 	getTokenResp, err := client.WebResource.GetToken(getTokenRequest).Do()
