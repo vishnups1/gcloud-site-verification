@@ -38,12 +38,13 @@ func addowners(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	cmd.SetOut(cmd.OutOrStdout())
-	insertRespJSON, err := insertResp.MarshalJSON()
+	insertRespBytes, err := insertResp.MarshalJSON()
 	if err != nil {
 		return err
 	}
-	cmd.Println(string(insertRespJSON))
+
+	cmd.SetOut(cmd.OutOrStdout())
+	cmd.Println(string(insertRespBytes))
 
 	return nil
 }
