@@ -1,0 +1,8 @@
+builds:
+  binary: gcloud-site-verify
+  goos:
+    - "darwin"
+    - "linux"
+goarch:
+  - "amd64"
+  - "386"
