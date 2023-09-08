@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -47,9 +48,18 @@ func trimPrefix(s string) string {
 	return s
 }
 
+func addPrefix(s string) string {
+	if siteType == "INET_DOMAIN" {
+		return fmt.Sprintf("dns://%s", s)
+	}
+	return s
+	// TODO: Add support for other site type
+}
+
 func init() {
 	RootCmd.PersistentFlags().StringVarP(&siteType, "type", "t", "INET_DOMAIN", "The type of site to be verified. Valid values are ANDROID_APP, INET_DOMAIN or SITE.")
 	RootCmd.PersistentFlags().StringVarP(&siteOwners, "owners", "o", "", "The list of owners to be added to the site. Separate multiple owners with a comma (e.g. foo@example.com,bar@example.com)")
 	RootCmd.PersistentFlags().StringVarP(&siteIdentifier, "identifier", "i", "", "The identifier of the site to be verified (e.g. http://www.example.com/, https://www.example.com/, dns://example.com).")
+	RootCmd.MarkPersistentFlagRequired("identifier")
 	RootCmd.PersistentFlags().StringVarP(&siteVerificationMethod, "method", "m", "DNS_TXT", "The method to use for verifying a site. Check here for a list of valid methods: https://developers.google.com/site-verification/v1/getting_started#tokens")
 }

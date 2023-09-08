@@ -8,17 +8,17 @@ import (
 )
 
 var (
-	insertCmd = &cobra.Command{
-		Use:   "insert",
-		Short: "Verifies ownership of a website or domain.",
-		Long:  "Verifies ownership of a website or domain. Before calling insert command, place the authenticated user's verification token on their website or domain.",
-		RunE:  insert,
-		Example: `gcloud-site-verify insert -i example.com -t INET_DOMAIN -m DNS_TXT -o "foo@example.com,bar@example.com"
-gcloud-site-verify insert --identifier example.com --owners "foo@example.com,bar@example.com"`,
+	addownersCmd = &cobra.Command{
+		Use:   "addowners",
+		Short: "Adds owner(s) to a site or domain.",
+		Long:  "Adds owner(s) to a site or domain. Before calling insert command, place the authenticated user's verification token on their website or domain.",
+		RunE:  addowners,
+		Example: `gcloud-site-verify addowners -i example.com -t INET_DOMAIN -m DNS_TXT -o "foo@example.com,bar@example.com"
+gcloud-site-verify addowners --identifier example.com --owners "foo@example.com,bar@example.com"`,
 	}
 )
 
-func insert(cmd *cobra.Command, args []string) error {
+func addowners(cmd *cobra.Command, args []string) error {
 
 	var owners []string
 	if siteOwners != "" {
@@ -49,5 +49,5 @@ func insert(cmd *cobra.Command, args []string) error {
 }
 
 func init() {
-	RootCmd.AddCommand(insertCmd)
+	RootCmd.AddCommand(addownersCmd)
 }

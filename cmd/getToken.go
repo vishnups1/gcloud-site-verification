@@ -10,10 +10,12 @@ import (
 
 var (
 	getTokenCmd = &cobra.Command{
-		Use:   "getToken",
-		Short: "Get a verification token.",
+		Use:   "gettoken",
+		Short: "Gets a verification token for the authenticated user to place on a website or domain.",
 		Long:  "Gets a verification token for the authenticated user to place on a website or domain.",
 		RunE:  getToken,
+		Example: `gcloud-site-verify gettoken -i example.com -t INET_DOMAIN -m DNS_TXT
+gcloud-site-verify gettoken --identifier example.com`,
 	}
 )
 
