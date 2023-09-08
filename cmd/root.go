@@ -23,7 +23,7 @@ func newRootCmd() *cobra.Command {
 		Use:               "gcloud-site-verify",
 		Short:             "Google Cloud Site Verification CLI.",
 		Long:              "A command-line utility for verifying and managing domain ownership using the Site Verification API.",
-		Version:           "0.0.1",
+		Version:           "0.1.0",
 		PersistentPreRunE: setup,
 	}
 }
