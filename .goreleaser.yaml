@@ -3,6 +3,6 @@ builds:
   goos:
     - "darwin"
     - "linux"
-goarch:
-  - "amd64"
-  - "386"
+  goarch:
+    - "amd64"
+    - "386"
