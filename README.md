@@ -55,18 +55,19 @@ sudo mv gcloud-site-verify /usr/local/bin/
 ## Usage
 
 ```bash
-> gcloud-site-verify --help
-
-Command-line utility for verifying and managing domain ownership using the Site Verification API.
+gcloud-site-verify -h
+A command-line utility for verifying and managing domain ownership using the Site Verification API.
 
 Usage:
   gcloud-site-verify [command]
 
 Available Commands:
-  addowners   Adds owner(s) to a site or domain.
-  gettoken    Gets a verification token for the authenticated user to place on a website or domain.
-  help        Help about any command
-  update      Updates the list of owners for a website or domain.
+  addowners    Adds owner(s) to a site or domain.
+  getresource  Retrieves the most current data for a website or domain.
+  gettoken     Gets a verification token for the authenticated user to place on a website or domain.
+  help         Help about any command
+  removeowners Removes owner(s) to a site or domain.
+  update       Updates the list of owners for a website or domain.
 
 Flags:
   -h, --help                help for gcloud-site-verify
@@ -81,26 +82,26 @@ Use "gcloud-site-verify [command] --help" for more information about a command.
 
 ## Examples
 
-### Get a verification token.
+#### Get a verification token.
 
 ```bash
-> gcloud-site-verify gettoken --identifier dns://example.com --type INET_DOMAIN --method DNS_TXT
+gcloud-site-verify gettoken --identifier dns://example.com --type INET_DOMAIN --method DNS_TXT
 ```
 
-### Add owners for a site.
+#### Add owners for a site.
 
 ```bash
-> gcloud-site-verify addowners --identifier dns://example.com --owners "foo@example.com,bar@example.com"
+gcloud-site-verify addowners --identifier dns://example.com --owners "foo@example.com,bar@example.com"
 ```
 
-### Remove owners for a site
+#### Remove owners for a site
 
 ```bash
-> gcloud-site-verify removeowners --identifier dns://example.com --owners "foo@example.com"
+gcloud-site-verify removeowners --identifier dns://example.com --owners "foo@example.com"
 ```
 
-### Get the list of owners for a site
+#### Get the list of owners for a site
 
 ```bash
-> gcloud-site-verify getresource -i dns://example.com
+gcloud-site-verify getresource -i dns://example.com
 ```
