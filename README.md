@@ -82,25 +82,25 @@ Use "gcloud-site-verify [command] --help" for more information about a command.
 
 ## Examples
 
-#### Get a verification token.
+#### Get verification token.
 
 ```bash
 gcloud-site-verify gettoken --identifier dns://example.com --type INET_DOMAIN --method DNS_TXT
 ```
 
-#### Add owners for a site.
+#### Add owners.
 
 ```bash
 gcloud-site-verify addowners --identifier dns://example.com --owners "foo@example.com,bar@example.com"
 ```
 
-#### Remove owners for a site
+#### Remove owners.
 
 ```bash
 gcloud-site-verify removeowners --identifier dns://example.com --owners "foo@example.com"
 ```
 
-#### Get the list of owners for a site
+#### Get the list of owners for a site.
 
 ```bash
 gcloud-site-verify getresource -i dns://example.com
