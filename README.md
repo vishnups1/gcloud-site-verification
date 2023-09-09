@@ -33,9 +33,9 @@ Pick the binary for your platform from the [releases page](https://github.com/vi
 ```bash
 TEMP_DIR=$(mktemp -d)
 cd $TEMP_DIR
-URL="https://github.com/vishnugth/gcloud-site-verification/releases/download/v0.1.0/gcloud-site-verification_0.1.0_darwin_amd64.tar.gz"
+URL="https://github.com/vishnugth/gcloud-site-verification/releases/download/v0.2.0/gcloud-site-verification_0.2.0_darwin_amd64.tar.gz"
 curl -LO $URL
-tar -xzvf gcloud-site-verification_0.1.0_darwin_amd64.tar.gz
+tar -xzvf gcloud-site-verification_0.2.0_darwin_amd64.tar.gz
 chmod +x gcloud-site-verify
 sudo mv gcloud-site-verify /usr/local/bin/
 ```
@@ -45,9 +45,9 @@ sudo mv gcloud-site-verify /usr/local/bin/
 ```bash
 TEMP_DIR=$(mktemp -d)
 cd $TEMP_DIR
-URL="https://github.com/vishnugth/gcloud-site-verification/releases/download/v0.1.0/gcloud-site-verification_0.1.0_linux_386.tar.gz"
+URL="https://github.com/vishnugth/gcloud-site-verification/releases/download/v0.2.0/gcloud-site-verification_0.2.0_linux_386.tar.gz"
 curl -LO $URL
-tar -xzvf gcloud-site-verification_0.1.0_linux_386.tar.gz
+tar -xzvf gcloud-site-verification_0.2.0_linux_386.tar.gz
 chmod +x gcloud-site-verify
 sudo mv gcloud-site-verify /usr/local/bin/
 ```
