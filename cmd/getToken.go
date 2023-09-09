@@ -45,7 +45,7 @@ func getToken(cmd *cobra.Command, args []string) error {
 	cmd.SetOut(os.Stdout)
 	cmd.Println(string(tokenBytes))
 
-	return nil
+	return err
 }
 
 func init() {

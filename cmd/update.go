@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"google.golang.org/api/siteverification/v1"
 )
 
 var (
@@ -14,8 +13,8 @@ var (
 		Short: "Updates the list of owners for a website or domain.",
 		Long:  "Updates the list of owners for a website or domain.",
 		RunE:  update,
-		Example: `gcloud-site-verify update -i example.com -t INET_DOMAIN -m DNS_TXT -o 'foo@example.com,bar@example.com'
-gcloud-site-verify update --identifier example.com --owners 'foo@example.com,bar@example.com'`,
+		Example: `gcloud-site-verify update -i dns://example.com -t INET_DOMAIN -m DNS_TXT -o 'foo@example.com,bar@example.com'
+gcloud-site-verify update --identifier dns://example.com --owners 'foo@example.com,bar@example.com'`,
 	}
 )
 
@@ -31,26 +30,14 @@ func update(cmd *cobra.Command, args []string) error {
 		return errors.New("required flag(s) \"owners\" not set.")
 	}
 
-	updateResp, err := client.WebResource.Update(addPrefix(siteIdentifier), &siteverification.SiteVerificationWebResourceResource{
-		Owners: owners,
-		Site: &siteverification.SiteVerificationWebResourceResourceSite{
-			Identifier: trimPrefix(siteIdentifier),
-			Type:       siteType,
-		},
-	}).Do()
-
+	resp, err := webResourceUpdate(owners)
 	if err != nil {
 		return err
 	}
 
 	cmd.SetOut(cmd.OutOrStdout())
-	insertRespJSON, err := updateResp.MarshalJSON()
-	if err != nil {
-		return err
-	}
-	cmd.Println(string(insertRespJSON))
-
-	return nil
+	cmd.Println(string(resp))
+	return err
 }
 
 func init() {

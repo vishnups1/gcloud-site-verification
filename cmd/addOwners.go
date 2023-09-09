@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"google.golang.org/api/siteverification/v1"
 )
 
 var (
@@ -13,8 +12,8 @@ var (
 		Short: "Adds owner(s) to a site or domain.",
 		Long:  "Adds owner(s) to a site or domain. Before calling insert command, place the authenticated user's verification token on their website or domain.",
 		RunE:  addowners,
-		Example: `gcloud-site-verify addowners -i example.com -t INET_DOMAIN -m DNS_TXT -o "foo@example.com,bar@example.com"
-gcloud-site-verify addowners --identifier example.com --owners "foo@example.com,bar@example.com"`,
+		Example: `gcloud-site-verify addowners -i dns://example.com -t INET_DOMAIN -m DNS_TXT -o "foo@example.com,bar@example.com"
+gcloud-site-verify addowners --identifier dns://example.com --owners "foo@example.com,bar@example.com"`,
 	}
 )
 
@@ -27,26 +26,14 @@ func addowners(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	insertResp, err := client.WebResource.Insert(siteVerificationMethod, &siteverification.SiteVerificationWebResourceResource{
-		Owners: owners,
-		Site: &siteverification.SiteVerificationWebResourceResourceSite{
-			Identifier: trimPrefix(siteIdentifier),
-			Type:       siteType,
-		},
-	}).Do()
-	if err != nil {
-		return err
-	}
-
-	insertRespBytes, err := insertResp.MarshalJSON()
+	resp, err := weResourceInsert(owners)
 	if err != nil {
 		return err
 	}
 
 	cmd.SetOut(cmd.OutOrStdout())
-	cmd.Println(string(insertRespBytes))
-
-	return nil
+	cmd.Println(string(resp))
+	return err
 }
 
 func init() {

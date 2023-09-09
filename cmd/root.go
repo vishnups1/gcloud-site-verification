@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -48,12 +47,76 @@ func trimPrefix(s string) string {
 	return s
 }
 
-func addPrefix(s string) string {
-	if siteType == "INET_DOMAIN" {
-		return fmt.Sprintf("dns://%s", s)
+func webResourceGet(id string) (response *siteverification.SiteVerificationWebResourceResource, err error) {
+	getResp, err := client.WebResource.Get(id).Do()
+	if err != nil {
+		return nil, err
 	}
-	return s
-	// TODO: Add support for other site type
+
+	return getResp, err
+}
+
+func webResourceUpdate(owners []string) (responseBytes []byte, err error) {
+	site := &siteverification.SiteVerificationWebResourceResourceSite{
+		Identifier: trimPrefix(siteIdentifier),
+		Type:       siteType,
+	}
+
+	updateResp, err := client.WebResource.Update(siteIdentifier, &siteverification.SiteVerificationWebResourceResource{
+		Site:   site,
+		Owners: owners,
+	}).Do()
+	if err != nil {
+		return nil, err
+	}
+
+	responseBytes, err = updateResp.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+
+	return responseBytes, err
+}
+
+func weResourceInsert(owners []string) (responseBytes []byte, err error) {
+	site := &siteverification.SiteVerificationWebResourceResourceSite{
+		Identifier: trimPrefix(siteIdentifier),
+		Type:       siteType,
+	}
+
+	insertResp, err := client.WebResource.Insert(siteVerificationMethod, &siteverification.SiteVerificationWebResourceResource{
+		Owners: owners,
+		Site:   site,
+	}).Do()
+	if err != nil {
+		return nil, err
+	}
+
+	responseBytes, err = insertResp.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+
+	return responseBytes, err
+}
+
+func removeMembersFromList(members, membersToRemove []string) []string {
+	result := []string{}
+
+	// Create a map of items to remove for faster lookup
+	membersToRemoveMap := make(map[string]bool)
+	for _, item := range membersToRemove {
+		membersToRemoveMap[item] = true
+	}
+
+	// Iterate through the original slice and add items not in the itemsToRemove map to the result slice
+	for _, item := range members {
+		if !membersToRemoveMap[item] {
+			result = append(result, item)
+		}
+	}
+
+	return result
 }
 
 func init() {
