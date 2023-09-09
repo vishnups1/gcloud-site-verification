@@ -54,7 +54,7 @@ sudo mv gcloud-site-verify /usr/local/bin/
 
 ## Usage
 
-```bash
+```console
 gcloud-site-verify -h
 A command-line utility for verifying and managing domain ownership using the Site Verification API.
 
@@ -84,24 +84,24 @@ Use "gcloud-site-verify [command] --help" for more information about a command.
 
 #### Get verification token.
 
-```bash
+```console
 gcloud-site-verify gettoken --identifier dns://example.com --type INET_DOMAIN --method DNS_TXT
 ```
 
 #### Add owners.
 
-```bash
+```console
 gcloud-site-verify addowners --identifier dns://example.com --owners "foo@example.com,bar@example.com"
 ```
 
 #### Remove owners.
 
-```bash
+```console
 gcloud-site-verify removeowners --identifier dns://example.com --owners "foo@example.com"
 ```
 
 #### Get the list of owners for a site.
 
-```bash
+```console
 gcloud-site-verify getresource -i dns://example.com
 ```
