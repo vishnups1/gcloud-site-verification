@@ -80,27 +80,29 @@ Flags:
 Use "gcloud-site-verify [command] --help" for more information about a command.
 ```
 
-## Examples
+## Steps to verify a site
 
-#### Get verification token.
+- Get a verification token.
 
 ```console
 gcloud-site-verify gettoken --identifier dns://example.com --type INET_DOMAIN --method DNS_TXT
 ```
 
-#### Add owners.
+- Add the token as a `TXT` record in your DNS.
+
+- Add owners.
 
 ```console
 gcloud-site-verify addowners --identifier dns://example.com --owners "foo@example.com,bar@example.com"
 ```
 
-#### Remove owners.
+- Remove owners.
 
 ```console
 gcloud-site-verify removeowners --identifier dns://example.com --owners "foo@example.com"
 ```
 
-#### Get the list of owners for a site.
+- Get the list of owners for a site.
 
 ```console
 gcloud-site-verify getresource -i dns://example.com
